@@ -3,7 +3,7 @@ name: Trigger Vercel Deploy Hook
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
