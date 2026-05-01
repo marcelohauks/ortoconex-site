@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { MapPin, Phone, MessageCircle } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 export default function Home() {
   return (
@@ -16,15 +16,26 @@ export default function Home() {
       >
         <source src="/video/logo-video.mp4" type="video/mp4" />
       </video>
-      <a
-        href="https://wa.me/5519991299358"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="whatsapp-floating-button"
-        aria-label="Abrir conversa no WhatsApp"
-      >
-        <FaWhatsapp className="whatsapp-icon" />
-      </a>
+      <div className="floating-socials">
+        <a
+          href="https://wa.me/5519991299358"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-floating-button whatsapp-floating-button"
+          aria-label="Abrir conversa no WhatsApp"
+        >
+          <FaWhatsapp className="whatsapp-icon" />
+        </a>
+        <a
+          href="https://www.instagram.com/ortoconex?igsh=cmFsdHYxcHN1eTVk"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-floating-button instagram-floating-button"
+          aria-label="Abrir Instagram da OrtoConex"
+        >
+          <FaInstagram className="whatsapp-icon" />
+        </a>
+      </div>
       <section className="construction-card">
         <p className="construction-kicker">ORTOCONEX</p>
         <div className="construction-logo-wrapper">
