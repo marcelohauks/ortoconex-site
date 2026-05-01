@@ -5,6 +5,17 @@ import { FaWhatsapp } from 'react-icons/fa';
 export default function Home() {
   return (
     <main className="construction-page">
+      <video
+        className="construction-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="/video/logo-video.mp4" type="video/mp4" />
+      </video>
       <a
         href="https://wa.me/5519991299358"
         target="_blank"
