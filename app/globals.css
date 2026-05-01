@@ -16,18 +16,42 @@ body {
 }
 
 .construction-page {
+  position: relative;
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 2rem;
+  isolation: isolate;
+}
+
+.construction-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(2, 6, 23, 0.62), rgba(2, 6, 23, 0.62)),
+    url('/images/backgrounds/industrial-machine.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+.construction-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.08) 0%, rgba(2, 6, 23, 0.42) 100%);
+  z-index: -1;
 }
 
 .construction-card {
+  position: relative;
   max-width: 40rem;
   width: 100%;
   border: 1px solid rgba(148, 163, 184, 0.25);
   border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(15, 23, 42, 0.82);
   backdrop-filter: blur(4px);
   padding: 2.5rem 2rem;
   text-align: center;
