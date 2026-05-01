@@ -15,8 +15,38 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'Ortoconex',
-  description: 'Site institucional da OrtoConex em construção.',
+  metadataBase: new URL('https://www.ortoconex.com.br'),
+  applicationName: 'Ortoconex',
+  title: {
+    default: 'Ortoconex',
+    template: '%s | Ortoconex',
+  },
+  description: 'Ortoconex Suprimentos Industriais',
+  alternates: {
+    canonical: 'https://www.ortoconex.com.br',
+  },
+  openGraph: {
+    title: 'Ortoconex',
+    description: 'Ortoconex Suprimentos Industriais',
+    url: 'https://www.ortoconex.com.br',
+    siteName: 'Ortoconex',
+    type: 'website',
+    locale: 'pt_BR',
+    images: [
+      {
+        url: '/images/branding/ortoconex-logo.png',
+        width: 512,
+        height: 512,
+        alt: 'Logo da Ortoconex',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ortoconex',
+    description: 'Ortoconex Suprimentos Industriais',
+    images: ['/images/branding/ortoconex-logo.png'],
+  },
   icons: {
     icon: '/images/branding/ortoconex-logo.png',
     shortcut: '/images/branding/ortoconex-logo.png',
