@@ -1,0 +1,6 @@
+# Ignore PHP site files
+php-site/
+node_modules/
+.next/
+.env*.local
+*.log

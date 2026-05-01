@@ -1,0 +1,13 @@
+{
+  "buildCommand": "yarn build",
+  "devCommand": "yarn dev",
+  "installCommand": "yarn install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "rewrites": [
+    {
+      "source": "/ucp/ipn/mercadopago_L2Gloria28gTxk75s465gzo89quzR58wqlM092024.php",
+      "destination": "/api/ipn/mercadopago"
+    }
+  ]
+}

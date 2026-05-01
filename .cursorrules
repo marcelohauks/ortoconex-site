@@ -1,0 +1,16 @@
+# Cursor Rules for L2Gloria Project
+
+## Project Context
+This is a Next.js 16 project migrating from PHP, using MySQL database.
+The project follows modern React patterns with TypeScript and Tailwind CSS.
+
+## Chrome MCP Configuration
+Chrome MCP should be configured in Cursor settings to enable browser testing capabilities.
+The development server runs on http://localhost:3000
+
+## Code Style
+- Use TypeScript for all new code
+- Follow Next.js 16 App Router conventions
+- Use Tailwind CSS for styling
+- Prefer server components when possible
+- Use async/await for database operations
