@@ -214,10 +214,31 @@ body {
 
 .whatsapp-floating-button {
   background: #22c55e;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.whatsapp-floating-button .whatsapp-icon {
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .instagram-floating-button {
   background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 4%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  animation: whatsapp-float 2.8s ease-in-out infinite,
+    instagram-ambient-glow 3.5s ease-in-out infinite;
+}
+
+@keyframes instagram-ambient-glow {
+  0%,
+  100% {
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.32), 0 0 14px rgba(214, 36, 159, 0.22),
+      0 0 28px rgba(253, 89, 73, 0.12);
+  }
+  50% {
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.32), 0 0 22px rgba(214, 36, 159, 0.48),
+      0 0 40px rgba(99, 102, 241, 0.2);
+  }
 }
 
 .social-floating-button::before {
@@ -232,6 +253,26 @@ body {
 
 .whatsapp-floating-button::before {
   background: radial-gradient(circle, rgba(34, 197, 94, 0.35) 0%, rgba(34, 197, 94, 0) 70%);
+}
+
+/** Luz suave “piscando” atrás só do WhatsApp — chama atenção sem exagerar */
+.whatsapp-floating-button::after {
+  content: '';
+  position: absolute;
+  inset: -1.15rem;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(187, 247, 208, 0.45) 18%,
+    rgba(74, 222, 128, 0.22) 42%,
+    rgba(34, 197, 94, 0.08) 62%,
+    transparent 72%
+  );
+  z-index: -2;
+  pointer-events: none;
+  animation: whatsapp-beacon 2.5s ease-in-out infinite;
+  animation-delay: 0.35s;
 }
 
 .instagram-floating-button::before {
@@ -266,6 +307,26 @@ body {
   50% {
     opacity: 0.75;
     transform: scale(1.02);
+  }
+}
+
+@keyframes whatsapp-beacon {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.62;
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-floating-button::after {
+    animation: none;
+    opacity: 0.35;
+    transform: scale(1);
   }
 }
 
@@ -352,5 +413,10 @@ body {
   .social-floating-button {
     width: 2.8rem;
     height: 2.8rem;
+  }
+
+  .whatsapp-floating-button {
+    width: 4.2rem;
+    height: 4.2rem;
   }
 }
