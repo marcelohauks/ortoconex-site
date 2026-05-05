@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Sora } from 'next/font/google';
 
 import './globals.css';
@@ -13,6 +13,12 @@ const sora = Sora({
   variable: '--font-sora',
   weight: ['600', '700'],
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.ortoconex.com.br'),

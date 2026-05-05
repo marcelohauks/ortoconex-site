@@ -6,11 +6,9 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { ArrowLeft, Menu, Search, X } from 'lucide-react';
 
+import { SiteConstrucaoLangSwitch } from './SiteConstrucaoLangSwitch';
 import { SiteConstrucaoNavBar } from './SiteConstrucaoNavBar';
 import { useLocale } from './LocaleContext';
-
-const FLAG_BR = 'https://flagcdn.com/w40/br.png';
-const FLAG_US = 'https://flagcdn.com/w40/us.png';
 
 type Props = {
   search: string;
@@ -36,8 +34,8 @@ export function ProdutosHeader({
   const searchField = (
     <form
       onSubmit={onSearchSubmit}
-      className={`relative w-full ${
-        searchBelowMenu ? 'max-w-xl' : 'min-w-[200px] flex-1 md:max-w-md md:flex-none'
+      className={`relative w-full min-w-0 ${
+        searchBelowMenu ? 'max-w-xl' : 'md:max-w-md'
       }`}
     >
       <Search
@@ -49,101 +47,82 @@ export function ProdutosHeader({
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
         placeholder={t.searchPlaceholder}
-        className="w-full rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-3 text-sm text-slate-800 shadow-inner outline-none transition placeholder:text-slate-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/30"
+        className="w-full min-h-[44px] rounded-lg border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-base text-slate-800 shadow-inner outline-none transition placeholder:text-slate-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/30 sm:min-h-0 sm:py-2 sm:text-sm"
         aria-label={t.searchPlaceholder}
+        enterKeyHint="search"
       />
     </form>
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:px-6 sm:py-5">
-        <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href={backHref}
-            className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-primary-700 transition hover:text-primary-900"
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden />
-            {backLabel}
-          </Link>
-          <Link
-            href="/site-construcao"
-            className="flex shrink-0 items-center gap-3 sm:ml-2 sm:gap-4"
-          >
-            <Image
-              src="/images/branding/ortoconex-logo.png"
-              alt="ORTOCONEX"
-              width={68}
-              height={68}
-              className="h-[3.825rem] w-[3.825rem] object-contain sm:h-[4.25rem] sm:w-[4.25rem]"
-            />
-            <span className="font-sora text-[1.434375rem] font-bold tracking-[0.05em] text-slate-800 sm:text-[1.9125rem] leading-none">
-              ORTOCONEX
-            </span>
-          </Link>
-
-          {!searchBelowMenu ? searchField : null}
-
-          <div
-            className={`flex shrink-0 items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 p-0.5 ${
-              searchBelowMenu ? 'ml-auto' : ''
-            }`}
-          >
-            <button
-              type="button"
-              onClick={() => setLocale('pt')}
-              className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium transition ${
-                locale === 'pt'
-                  ? 'bg-white text-slate-900 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800'
-              }`}
-              aria-pressed={locale === 'pt'}
-              aria-label={t.accessibility.langPt}
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-white/90">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:px-6 sm:py-5">
+        <div className="flex flex-col gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:flex-wrap sm:items-center sm:gap-3">
+            <Link
+              href={backHref}
+              className="inline-flex max-w-[40%] shrink-0 items-center gap-1 text-xs font-medium text-primary-700 transition hover:text-primary-900 min-[400px]:text-sm sm:max-w-none"
             >
-              <Image
-                src={FLAG_BR}
-                alt=""
-                width={20}
-                height={15}
-                className="h-3.5 w-5 rounded-sm object-cover shadow-sm"
-              />
-              PT
-            </button>
-            <button
-              type="button"
-              onClick={() => setLocale('en')}
-              className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium transition ${
-                locale === 'en'
-                  ? 'bg-white text-slate-900 shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800'
-              }`}
-              aria-pressed={locale === 'en'}
-              aria-label={t.accessibility.langEn}
+              <ArrowLeft className="h-4 w-4 shrink-0" aria-hidden />
+              <span className="truncate">{backLabel}</span>
+            </Link>
+            <Link
+              href="/site-construcao"
+              className="group flex min-w-0 flex-1 items-center gap-2 sm:ml-0 sm:shrink-0 sm:gap-3"
             >
-              <Image
-                src={FLAG_US}
-                alt=""
-                width={20}
-                height={15}
-                className="h-3.5 w-5 rounded-sm object-cover shadow-sm"
+              <span className="header-logo-float h-11 w-11 sm:h-[4.25rem] sm:w-[4.25rem]">
+                <Image
+                  src="/images/branding/ortoconex-logo.png"
+                  alt="ORTOCONEX"
+                  width={68}
+                  height={68}
+                  className="h-full w-full object-contain"
+                />
+              </span>
+              <span className="truncate font-sora text-[1.15rem] font-bold tracking-[0.05em] text-slate-800 sm:text-[1.9125rem]">
+                ORTOCONEX
+              </span>
+            </Link>
+
+            {!searchBelowMenu ? (
+              <div className="hidden min-w-0 flex-1 sm:flex sm:max-w-xl sm:justify-center sm:pl-2">
+                {searchField}
+              </div>
+            ) : null}
+
+            <div
+              className={`flex shrink-0 items-center gap-1.5 sm:gap-2 ${
+                searchBelowMenu ? 'ml-auto' : ''
+              }`}
+            >
+              <SiteConstrucaoLangSwitch
+                locale={locale}
+                setLocale={setLocale}
+                t={t}
               />
-              EN
-            </button>
+              <button
+                type="button"
+                className="inline-flex h-11 min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 sm:hidden"
+                onClick={() => setNavMobileOpen((o) => !o)}
+                aria-expanded={navMobileOpen}
+                aria-label={
+                  navMobileOpen
+                    ? t.accessibility.navClose
+                    : t.accessibility.navOpen
+                }
+              >
+                {navMobileOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </button>
+            </div>
           </div>
 
-          <button
-            type="button"
-            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 sm:hidden ${
-              searchBelowMenu ? '' : 'ml-auto'
-            }`}
-            onClick={() => setNavMobileOpen((o) => !o)}
-            aria-expanded={navMobileOpen}
-            aria-label={
-              navMobileOpen ? t.accessibility.navClose : t.accessibility.navOpen
-            }
-          >
-            {navMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          {!searchBelowMenu ? (
+            <div className="w-full min-w-0 sm:hidden">{searchField}</div>
+          ) : null}
         </div>
 
         <SiteConstrucaoNavBar

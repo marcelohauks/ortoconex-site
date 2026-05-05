@@ -35,7 +35,7 @@ export function ProductTeaserCard({
         />
         <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/[0.04] transition group-hover:ring-primary-400/30" />
       </div>
-      <p className="mt-3 px-0.5 text-center text-sm font-semibold leading-snug tracking-tight text-slate-800 transition duration-300 group-hover:text-primary-800 sm:text-[0.95rem]">
+      <p className="mt-2.5 line-clamp-2 px-0.5 text-center text-xs font-semibold leading-snug tracking-tight text-slate-800 transition duration-300 group-hover:text-primary-800 min-[400px]:text-sm sm:mt-3 sm:text-[0.95rem] sm:leading-snug">
         {title}
       </p>
     </Link>

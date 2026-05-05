@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
+import { smoothScrollToHash } from './SiteConstrucaoHashScroll';
 import { useLocale } from './LocaleContext';
 
 type Props = {
@@ -34,9 +34,32 @@ export function SiteConstrucaoNavBar({ mobileOpen, onLinkClick }: Props) {
         <Link
           key={href}
           href={href}
-          onClick={() => onLinkClick?.()}
+          scroll={!href.includes('#')}
+          onClick={(e) => {
+            if (typeof window !== 'undefined') {
+              try {
+                const url = new URL(href, window.location.origin);
+                if (
+                  pathname === '/site-construcao' &&
+                  url.pathname === '/site-construcao' &&
+                  url.hash
+                ) {
+                  e.preventDefault();
+                  window.history.pushState(
+                    null,
+                    '',
+                    `${url.pathname}${url.hash}`,
+                  );
+                  requestAnimationFrame(() => smoothScrollToHash(url.hash));
+                }
+              } catch {
+                /* deixa o Link seguir */
+              }
+            }
+            onLinkClick?.();
+          }}
           aria-current={key === 'produtos' && onProdutosSection ? 'page' : undefined}
-          className={`rounded-lg px-3 py-2 text-left text-sm font-medium transition sm:text-center ${
+          className={`rounded-lg px-3 py-2.5 text-left text-sm font-medium transition min-h-[44px] sm:min-h-0 sm:py-2 sm:text-center ${
             key === 'produtos' && onProdutosSection
               ? 'bg-primary-50 text-primary-900'
               : 'text-slate-600 hover:bg-brandLime-50 hover:text-primary-800'

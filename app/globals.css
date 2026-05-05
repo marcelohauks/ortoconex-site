@@ -190,8 +190,8 @@ body {
 
 .floating-socials {
   position: fixed;
-  bottom: 1.2rem;
-  right: 1.2rem;
+  bottom: max(1.2rem, env(safe-area-inset-bottom, 0px));
+  right: max(1.2rem, env(safe-area-inset-right, 0px));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -337,6 +337,32 @@ body {
   }
   50% {
     transform: translateY(-5px);
+  }
+}
+
+/** Logo no menu (prévia / produtos): mesmo movimento suave da home `.construction-logo`. */
+.header-logo-float {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  animation: logo-float 4.2s ease-in-out infinite;
+  filter: drop-shadow(0 6px 14px rgba(249, 151, 30, 0.14));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.header-logo-float:hover {
+  animation-play-state: paused;
+  transform: translateY(-2px) scale(1.02);
+  filter: drop-shadow(0 8px 18px rgba(249, 151, 30, 0.22));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-logo-float,
+  .header-logo-float:hover {
+    animation: none;
+    transform: none;
+    filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.08));
   }
 }
 

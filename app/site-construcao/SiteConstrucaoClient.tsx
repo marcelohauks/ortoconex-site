@@ -16,7 +16,9 @@ import {
 } from 'lucide-react';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
+import { MarketsAtendidosGrid } from './MarketsAtendidosGrid';
 import { ProductTeaserCard } from './ProductTeaserCard';
+import { SiteConstrucaoLangSwitch } from './SiteConstrucaoLangSwitch';
 import { SiteConstrucaoNavBar } from './SiteConstrucaoNavBar';
 import { useLocale } from './LocaleContext';
 import {
@@ -29,9 +31,6 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1600&q=80',
   'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1600&q=80',
 ];
-
-const FLAG_BR = 'https://flagcdn.com/w40/br.png';
-const FLAG_US = 'https://flagcdn.com/w40/us.png';
 
 const WHATSAPP_HREF = 'https://wa.me/5519991299358';
 const INSTAGRAM_HREF =
@@ -88,27 +87,29 @@ export function SiteConstrucaoClient() {
         </a>
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:px-6 sm:py-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+      <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-white/90">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:gap-4 sm:px-6 sm:py-5">
+          <div className="flex items-center justify-between gap-2 sm:gap-3">
             <Link
               href="/site-construcao"
-              className="flex shrink-0 items-center gap-4"
+              className="group flex min-w-0 flex-1 items-center gap-2.5 sm:gap-4"
             >
-              <Image
-                src="/images/branding/ortoconex-logo.png"
-                alt="ORTOCONEX"
-                width={82}
-                height={82}
-                className="h-[4.25rem] w-[4.25rem] object-contain sm:h-[4.675rem] sm:w-[4.675rem]"
-                priority
-              />
-              <span className="font-sora text-[1.434375rem] font-bold tracking-[0.06em] text-slate-800 sm:text-[1.9125rem] leading-none">
+              <span className="header-logo-float h-12 w-12 sm:h-[4.675rem] sm:w-[4.675rem]">
+                <Image
+                  src="/images/branding/ortoconex-logo.png"
+                  alt="ORTOCONEX"
+                  width={82}
+                  height={82}
+                  className="h-full w-full object-contain"
+                  priority
+                />
+              </span>
+              <span className="truncate font-sora text-[1.2rem] font-bold tracking-[0.06em] text-slate-800 sm:text-[1.9125rem]">
                 ORTOCONEX
               </span>
             </Link>
 
-            <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:max-w-xl sm:justify-center sm:pl-4">
+            <div className="hidden min-w-0 flex-1 items-center justify-center gap-2 sm:flex sm:max-w-xl sm:pl-4">
               <form
                 onSubmit={onSubmitHeaderSearch}
                 className="relative flex min-w-0 max-w-md flex-1"
@@ -126,53 +127,16 @@ export function SiteConstrucaoClient() {
                   aria-label={t.searchPlaceholder}
                 />
               </form>
-              <div className="flex shrink-0 items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 p-0.5">
-                <button
-                  type="button"
-                  onClick={() => setLocale('pt')}
-                  className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium transition ${
-                    locale === 'pt'
-                      ? 'bg-white text-slate-900 shadow-sm'
-                      : 'text-slate-500 hover:text-slate-800'
-                  }`}
-                  aria-pressed={locale === 'pt'}
-                  aria-label={t.accessibility.langPt}
-                >
-                  <Image
-                    src={FLAG_BR}
-                    alt=""
-                    width={20}
-                    height={15}
-                    className="h-3.5 w-5 rounded-sm object-cover shadow-sm"
-                  />
-                  PT
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLocale('en')}
-                  className={`flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-medium transition ${
-                    locale === 'en'
-                      ? 'bg-white text-slate-900 shadow-sm'
-                      : 'text-slate-500 hover:text-slate-800'
-                  }`}
-                  aria-pressed={locale === 'en'}
-                  aria-label={t.accessibility.langEn}
-                >
-                  <Image
-                    src={FLAG_US}
-                    alt=""
-                    width={20}
-                    height={15}
-                    className="h-3.5 w-5 rounded-sm object-cover shadow-sm"
-                  />
-                  EN
-                </button>
-              </div>
+              <SiteConstrucaoLangSwitch
+                locale={locale}
+                setLocale={setLocale}
+                t={t}
+              />
             </div>
 
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 sm:hidden"
+              className="inline-flex h-11 min-h-[44px] min-w-[44px] shrink-0 touch-manipulation items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 sm:hidden"
               onClick={() => setMobileOpen((o) => !o)}
               aria-expanded={mobileOpen}
               aria-label={
@@ -183,6 +147,34 @@ export function SiteConstrucaoClient() {
             </button>
           </div>
 
+          <div className="flex flex-col gap-2 sm:hidden">
+            <form
+              onSubmit={onSubmitHeaderSearch}
+              className="relative flex w-full min-w-0"
+            >
+              <Search
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                aria-hidden
+              />
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={t.searchPlaceholder}
+                className="w-full min-h-[44px] rounded-lg border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-base text-slate-800 shadow-inner outline-none ring-primary-500/0 transition placeholder:text-slate-400 focus:border-primary-400 focus:ring-2 focus:ring-primary-500/30 sm:text-sm"
+                aria-label={t.searchPlaceholder}
+                enterKeyHint="search"
+              />
+            </form>
+            <div className="flex justify-end">
+              <SiteConstrucaoLangSwitch
+                locale={locale}
+                setLocale={setLocale}
+                t={t}
+              />
+            </div>
+          </div>
+
           <SiteConstrucaoNavBar
             mobileOpen={mobileOpen}
             onLinkClick={() => setMobileOpen(false)}
@@ -190,7 +182,8 @@ export function SiteConstrucaoClient() {
         </div>
       </header>
 
-      <section className="relative aspect-[21/9] min-h-[220px] w-full max-h-[min(56vh,520px)] overflow-hidden bg-gradient-to-b from-primary-50/40 via-slate-200 to-slate-300/90 sm:min-h-[280px]">
+      <div className="overflow-x-hidden [overflow-wrap:anywhere]">
+      <section className="relative isolate h-[min(50svh,440px)] min-h-[252px] w-full overflow-hidden bg-gradient-to-b from-primary-50/40 via-slate-200 to-slate-300/90 sm:aspect-[21/9] sm:h-auto sm:min-h-[280px] sm:max-h-[min(56vh,520px)]">
         {HERO_IMAGES.map((src, i) => (
           <div
             key={src}
@@ -208,13 +201,13 @@ export function SiteConstrucaoClient() {
               priority={i === 0}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-primary-900/15 to-transparent" />
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-4 pb-10 text-center sm:pb-14">
-              <h1 className="max-w-3xl font-sora text-2xl font-bold text-white drop-shadow sm:text-3xl md:text-4xl">
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-end px-3 pb-8 text-center sm:px-4 sm:pb-14">
+              <h1 className="max-w-[min(100%,40rem)] text-pretty font-sora text-xl font-bold leading-tight text-white drop-shadow [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] sm:text-3xl sm:leading-snug md:text-4xl">
                 {i === 0 && t.hero.slide1Title}
                 {i === 1 && t.hero.slide2Title}
                 {i === 2 && t.hero.slide3Title}
               </h1>
-              <p className="mt-2 max-w-2xl text-sm text-slate-100/95 sm:text-base">
+              <p className="mt-2 max-w-2xl text-pretty text-sm leading-relaxed text-slate-100/95 sm:text-base">
                 {i === 0 && t.hero.slide1Subtitle}
                 {i === 1 && t.hero.slide2Subtitle}
                 {i === 2 && t.hero.slide3Subtitle}
@@ -225,7 +218,7 @@ export function SiteConstrucaoClient() {
         <button
           type="button"
           onClick={() => goSlide(-1)}
-          className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-2 text-slate-800 shadow-md transition hover:bg-white"
+          className="absolute left-2 top-[40%] z-20 -translate-y-1/2 touch-manipulation rounded-full bg-white/90 p-2.5 text-slate-800 shadow-md transition hover:bg-white sm:top-1/2 sm:p-2"
           aria-label={t.accessibility.carouselPrev}
         >
           <ChevronLeft className="h-5 w-5" />
@@ -233,12 +226,12 @@ export function SiteConstrucaoClient() {
         <button
           type="button"
           onClick={() => goSlide(1)}
-          className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-2 text-slate-800 shadow-md transition hover:bg-white"
+          className="absolute right-2 top-[40%] z-20 -translate-y-1/2 touch-manipulation rounded-full bg-white/90 p-2.5 text-slate-800 shadow-md transition hover:bg-white sm:top-1/2 sm:p-2"
           aria-label={t.accessibility.carouselNext}
         >
           <ChevronRight className="h-5 w-5" />
         </button>
-        <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+        <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-4">
           {HERO_IMAGES.map((_, i) => (
             <button
               key={i}
@@ -270,7 +263,7 @@ export function SiteConstrucaoClient() {
             {t.products.subtitle}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-6 md:gap-y-10">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-7 md:grid-cols-4 md:gap-x-6 md:gap-y-10">
           {previewProducts.map((product, index) => (
             <ProductTeaserCard
               key={product.id}
@@ -330,25 +323,24 @@ export function SiteConstrucaoClient() {
         id="mercados"
         className="scroll-mt-24 border-t border-primary-100/60 bg-gradient-to-br from-brandLime-50/55 via-slate-100/95 to-primary-50/35"
       >
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-          <div className="mb-8 text-center">
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+          <div
+            className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35]"
+            aria-hidden
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 20% 30%, rgba(249,151,30,0.08), transparent 45%), radial-gradient(circle at 85% 70%, rgba(163,230,53,0.12), transparent 42%)',
+            }}
+          />
+          <div className="mb-8 text-center sm:mb-10">
             <h2 className="font-sora text-2xl font-bold text-slate-900 sm:text-3xl">
               {t.markets.title}
             </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-slate-600">
+            <p className="mx-auto mt-2 max-w-2xl px-1 text-sm text-slate-600 sm:text-base">
               {t.markets.subtitle}
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
-            {t.markets.items.map((item) => (
-              <div
-                key={item}
-                className="rounded-xl border border-slate-200 bg-white px-4 py-4 text-center text-sm font-medium text-slate-800 shadow-sm transition hover:border-primary-200/80 hover:shadow-md hover:shadow-primary-900/5"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+          <MarketsAtendidosGrid items={t.markets.items} />
         </div>
       </section>
 
@@ -474,6 +466,7 @@ export function SiteConstrucaoClient() {
           </p>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
